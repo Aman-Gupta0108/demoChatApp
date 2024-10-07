@@ -1,0 +1,54 @@
+// client 
+
+
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+
+class MyClient{
+	public static void main(String args[]){
+		Scanner in = new Scanner(System.in);
+		try{
+			Socket s = new Socket("localhost", 5505);
+
+			DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+			DataInputStream dis = new DataInputStream(s.getInputStream()); //input
+
+			String str = in.next();
+			
+
+			while(true){
+			
+				String stri =(String) dis.readUTF();
+				System.out.println("message = "+stri);
+			
+
+			dout.writeUTF(str);
+			str = in.next();
+
+			
+			if(str.equals("exit")){
+			
+
+			dout.flush();
+			dout.close();
+			s.close();
+			} 
+
+			}
+
+
+
+
+
+
+
+			
+		}
+catch(Exception e){System.out.println(e);}
+
+
+
+
+}
+}
